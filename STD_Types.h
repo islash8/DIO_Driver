@@ -1,50 +1,54 @@
-/*
- * STD_TYPES.h
- *
- *  Created on: Jan 29, 2019
- *      Author: islas
- */
+/************************************************************************************/
+/* Author  : Islam A.                                                               */
+/* Date    : 08 FEB 2019                                                            */
+/* Version : V02                                                                    */
+/************************************************************************************/
+/* Description                                                                      */
+/* ------------                                                                     */
+/* This header file is used to define some standard some standard data types, in a  */
+/*  predefined format.			                                                    */
+/*  u: unsigned, s: signed, f: float, then followed by the number of bits it can    */
+/*  store   																		*/
+/************************************************************************************/
+
+/************************************************************************************/
+/* -------------------------------> Guard Section <---------------------------------*/
+/************************************************************************************/
 
 #ifndef STD_TYPES_H_
 #define STD_TYPES_H_
 
-/*
- * types.h
- *
- *  Created on: Jan 29, 2019
- *      Author: islas
- */
+/************************************************************************************/
 
-/**************************************************************/
-/*  This header file is used to define some standard some     */
-/*  standard data types, in a predefined format.			  */
-/*  u: unsigned, s: signed, f: float, then followed by the    */
-/*  number of bits it can store 							  */
-/**************************************************************/
+/************************************************************************************/
+/* -------------------------> User defined data types <-----------------------------*/
+/************************************************************************************/
 
-/*======================Guard Section=========================*/
+typedef unsigned char       u8; /* ----> unsigned 8 bits  */
+typedef signed char         s8; /* ----> signed 8 bits    */
 
-/**************************************************************/
-/*  This is used as a guard format, in order not to define    */
-/*  this header file more than once.                          */
-/*  Checks if STD_TYPES is not defined before, if not         */
-/*  it defines it, and includes the header file. 			  */
-/**************************************************************/
+typedef unsigned short int u16; /* ----> unsigned 16 bits */
+typedef signed short int   s16; /* ----> signed 16 bits   */
 
-typedef unsigned char       u8;
-typedef signed char         s8;
-typedef unsigned short int u16;
-typedef signed short int   s16;
-typedef unsigned long int  u32;
-typedef signed long int    s32;
-typedef float              f32;
-typedef float              f64;
+typedef unsigned long int  u32; /* ----> unsigned 32 bits */
+typedef signed long int    s32; /* ----> signed 32 bits   */
 
-#define ERROR_NOK 0
-#define ERROR_OK  1
-#define NULL      0
-#define LOW	      0x00
-#define HIGH      0xFF
+typedef float              f32; /* ----> float 32 bits    */
+typedef float              f64; /* ----> float 64 bits    */
+
+/************************************************************************************/
+
+/************************************************************************************/
+/* -------------------------> User defined Macros     <-----------------------------*/
+/************************************************************************************/
+
+#define ERROR_NOK     (u8)0        /* ----> This is used as a status flag    */
+#define ERROR_OK      (u8)1		   /* ----> This is used as a status flag    */
+
+#define NULL      	  (void *)0    /* ----> This is used for initializing    */
+
+#define STD_LOW	      (u8)0x00	   /* ----> This is used as a STD low value  */
+#define STD_HIGH      (u8)0xFF	   /* ----> This is used as a STD high value */
 
 typedef union {
 	struct
@@ -60,5 +64,9 @@ typedef union {
 	}BitAccess;
 	u8 ByteAccess;
 }Register;
+
+/* ^ This is used for ease of access for registers, where it can be accessed through */
+/*   whole 8 bits at once, or it can be accessed each bit individually               */
+/* Ex: Register x; ---> (x -> ByteAccess = 0xFF;) or (x -> BitAccess.Bit0 = 1);      */
 
 #endif /* STD_TYPES_H_ */
