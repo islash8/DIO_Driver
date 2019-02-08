@@ -33,9 +33,6 @@
 #define DIO_PIN_HIGH    (u8)1	/* -> This is used to set pin value to high        */
 #define DIO_PIN_LOW     (u8)0   /* -> This is used to set pin value to low         */
 
-#define DIO_MAXPINNB 	(u8)31	/* -> This is used for input validation            */
-#define DIO_MAXPORTNB   (u8)4	/* -> This is used for input validation            */
-
 /************************************************************************************/
 
 /************************************************************************************/
@@ -98,7 +95,7 @@ typedef enum
 /* ---------------------------> Function Prototypes    <----------------------------*/
 /************************************************************************************/
 
-void DIO_u8Init(void);
+void DIO_vInit(void);
 
 /* ^ This function is used to initialize the DIO Driver with the values used inside */
 /*   the configuration file --> DIO_Config.h                                        */
