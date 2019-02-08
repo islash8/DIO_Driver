@@ -284,10 +284,32 @@ shiftedNumber[bit_number]
 /*            -> x = 0b11110000;                                */
 /**************************************************************/
 #define CONC_8BIT(b7, b6, b5, b4, b3, b2, b1, b0) \
-		CONC_HELPER(b7, b6, b5, b4, b3, b2, b1, b0)
+		(CONC_HELPER(b7, b6, b5, b4, b3, b2, b1, b0))
 
 #define CONC_HELPER(b7, b6, b5, b4, b3, b2, b1, b0) \
-		0b##b7##b6##b5##b4##b3##b2##b1##b0
+		(0b##b7##b6##b5##b4##b3##b2##b1##b0)
+
+/**************************************************************/
+/*  4. Set Port Value:							                */
+/*  operation -> Set the value of Port to high                  */
+/*  input 		-> variable port that needed to be set          */
+/*  output		-> variable port after set                      */
+/*  Example	  -> x = SET_PORT(x);				                */
+/*            -> x = 0b1111 1111;                               */
+/**************************************************************/
+#define SET_PORT(x) \
+	(x || 0x11)
+
+/**************************************************************/
+/*  4. Reset Port Value:							            */
+/*  operation -> Set the value of Port to low                   */
+/*  input 		-> variable port that needed to be reset        */
+/*  output		-> variable port after reset                    */
+/*  Example	  -> x = RESET_PORT(x);				                */
+/*            -> x = 0b0000 0000;                               */
+/**************************************************************/
+#define RESET_PORT(x) \
+	(x && 0x00)
 /*===============================================================*/
 
 #endif /*LIB_BIT_OPERATIONS_H_ */

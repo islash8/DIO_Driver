@@ -24,8 +24,14 @@
 /* -------------------------> User defined macros <---------------------------------*/
 /************************************************************************************/
 
-#define DIO_MAXPINNB 	(u8)31	/* -> This is used for input validation             */
+#define DIO_MAXPINNB 	(u8)32	/* -> This is used for input validation             */
 #define DIO_MAXPORTNB   (u8)4	/* -> This is used for input validation             */
+
+#define DIO_PIN_INIT_DIR_OUTPUT 	1
+#define DIO_PIN_INIT_DIR_INPUT 	    0
+
+#define DIO_PIN_INIT_VAL_HIGH		1
+#define DIO_PIN_INIT_VAL_LOW		0
 
 /************************************************************************************/
 
@@ -206,7 +212,7 @@
 
 /* ------------------------>>> Bit Access     <<<-----------------------------------*/
 #define DIO_Register_PORTD_BIT0        (((Register *)0x32) -> BitAccess.Bit0)
-#define DIO_Register_PORTD_BIT1        (((Register *)0x32) -> BitAccess.Bit1)
+#define DIO_Register_PORTD_BITSyntax1        (((Register *)0x32) -> BitAccess.Bit1)
 #define DIO_Register_PORTD_BIT2        (((Register *)0x32) -> BitAccess.Bit2)
 #define DIO_Register_PORTD_BIT3        (((Register *)0x32) -> BitAccess.Bit3)
 #define DIO_Register_PORTD_BIT4        (((Register *)0x32) -> BitAccess.Bit4)

@@ -5,4 +5,7 @@
  *      Author: islash8
  */
 
-
+void main (void)
+{
+	DIO_vInit();
+}

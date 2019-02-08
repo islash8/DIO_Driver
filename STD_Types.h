@@ -42,10 +42,10 @@ typedef float              f64; /* ----> float 64 bits    */
 /* -------------------------> User defined Macros     <-----------------------------*/
 /************************************************************************************/
 
-#define ERROR_NOK     (u8)0        /* ----> This is used as a status flag    */
-#define ERROR_OK      (u8)1		   /* ----> This is used as a status flag    */
+#define STD_ERROR_NOK     (u8)0        /* ----> This is used as a status flag    */
+#define STD_ERROR_OK      (u8)1		   /* ----> This is used as a status flag    */
 
-#define NULL      	  (void *)0    /* ----> This is used for initializing    */
+#define NULL      	  0    		   /* ----> This is used for initializing    */
 
 #define STD_LOW	      (u8)0x00	   /* ----> This is used as a STD low value  */
 #define STD_HIGH      (u8)0xFF	   /* ----> This is used as a STD high value */

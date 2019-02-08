@@ -24,14 +24,15 @@
 #define DIO_PIN_OUTPUT 	(u8)1   /* -> This is used to set pin direction to output  */
 #define DIO_PIN_INPUT 	(u8)0	/* -> This is used to set pin direction to input   */
 
+#define DIO_PIN_HIGH    (u8)1	/* -> This is used to set pin value to high        */
+#define DIO_PIN_LOW     (u8)0   /* -> This is used to set pin value to low         */
+
 #define DIO_PORT_OUTPUT (u8)0xFF/* -> This is used to set the whole port as output */
 #define DIO_PORT_INPUT  (u8)0x00/* -> This is used to set the whole port as input  */
 
 #define DIO_PORT_HIGH   (u8)0xFF/* -> This is used to set the whole port as high   */
 #define DIO_PORT_LOW    (u8)0x00/* -> This is used to set the whole port as low    */
 
-#define DIO_PIN_HIGH    (u8)1	/* -> This is used to set pin value to high        */
-#define DIO_PIN_LOW     (u8)0   /* -> This is used to set pin value to low         */
 
 /************************************************************************************/
 
@@ -51,20 +52,20 @@ typedef enum
 	DIO_PIN7, 	/* -----> PORTA.7 */
 	DIO_PIN8, 	/* -----> PORTB.0 */
 	DIO_PIN9, 	/* -----> PORTB.1 */
-	DIO_PIN10,	/* -----> PORTB.0 */
-	DIO_PIN11,	/* -----> PORTB.1 */
-	DIO_PIN12,	/* -----> PORTB.2 */
-	DIO_PIN13,	/* -----> PORTB.3 */
-	DIO_PIN14,	/* -----> PORTB.4 */
-	DIO_PIN15,	/* -----> PORTB.5 */
-	DIO_PIN16,	/* -----> PORTB.6 */
-	DIO_PIN17,	/* -----> PORTC.0 */
-	DIO_PIN18,	/* -----> PORTC.1 */
-	DIO_PIN19,	/* -----> PORTC.2 */
-	DIO_PIN20,	/* -----> PORTC.3 */
-	DIO_PIN21,	/* -----> PORTC.4 */
-	DIO_PIN22,	/* -----> PORTC.5 */
-	DIO_PIN23,	/* -----> PORTC.6 */
+	DIO_PIN10,	/* -----> PORTB.2 */
+	DIO_PIN11,	/* -----> PORTB.3 */
+	DIO_PIN12,	/* -----> PORTB.4 */
+	DIO_PIN13,	/* -----> PORTB.5 */
+	DIO_PIN14,	/* -----> PORTB.6 */
+	DIO_PIN15,	/* -----> PORTB.7 */
+	DIO_PIN16,	/* -----> PORTC.0 */
+	DIO_PIN17,	/* -----> PORTC.1 */
+	DIO_PIN18,	/* -----> PORTC.2 */
+	DIO_PIN19,	/* -----> PORTC.3 */
+	DIO_PIN20,	/* -----> PORTC.4 */
+	DIO_PIN21,	/* -----> PORTC.5 */
+	DIO_PIN22,	/* -----> PORTC.6 */
+	DIO_PIN23,	/* -----> PORTC.7 */
 	DIO_PIN24,	/* -----> PORTD.0 */
 	DIO_PIN25,	/* -----> PORTD.1 */
 	DIO_PIN26,	/* -----> PORTD.2 */
