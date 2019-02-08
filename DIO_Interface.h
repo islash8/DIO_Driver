@@ -21,20 +21,20 @@
 /* ---------------------------> Macro Definitions <---------------------------------*/
 /************************************************************************************/
 
-#define DIO_PIN_OUTPUT 	1 		/* -> This is used to set pin direction to output  */
-#define DIO_PIN_INPUT 	0		/* -> This is used to set pin direction to input   */
+#define DIO_PIN_OUTPUT 	(u8)1   /* -> This is used to set pin direction to output  */
+#define DIO_PIN_INPUT 	(u8)0	/* -> This is used to set pin direction to input   */
 
-#define DIO_PORT_OUTPUT 0xFF	/* -> This is used to set the whole port as output */
-#define DIO_PORT_INPUT  0x00	/* -> This is used to set the whole port as input  */
+#define DIO_PORT_OUTPUT (u8)0xFF/* -> This is used to set the whole port as output */
+#define DIO_PORT_INPUT  (u8)0x00/* -> This is used to set the whole port as input  */
 
-#define DIO_PORT_HIGH   0xFF 	/* -> This is used to set the whole port as high   */
-#define DIO_PORT_LOW    0x00    /* -> This is used to set the whole port as low    */
+#define DIO_PORT_HIGH   (u8)0xFF/* -> This is used to set the whole port as high   */
+#define DIO_PORT_LOW    (u8)0x00/* -> This is used to set the whole port as low    */
 
-#define DIO_PIN_HIGH    1		/* -> This is used to set pin value to high        */
-#define DIO_PIN_LOW     0       /* -> This is used to set pin value to low         */
+#define DIO_PIN_HIGH    (u8)1	/* -> This is used to set pin value to high        */
+#define DIO_PIN_LOW     (u8)0   /* -> This is used to set pin value to low         */
 
-#define DIO_MAXPINNB 	31		/* -> This is used for input validation            */
-#define DIO_MAXPORTNB   4		/* -> This is used for input validation            */
+#define DIO_MAXPINNB 	(u8)31	/* -> This is used for input validation            */
+#define DIO_MAXPORTNB   (u8)4	/* -> This is used for input validation            */
 
 /************************************************************************************/
 
@@ -78,7 +78,12 @@ typedef enum
 	DIO_PIN31,	/* -----> PORTD.7 */
 }DIO_ENU_PIN;
 
-/* ATmega32 Port Numbers definition */
+/************************************************************************************/
+
+/************************************************************************************/
+/* --------------------------> PORT Number Definitions <----------------------------*/
+/************************************************************************************/
+
 typedef enum
 {
 	DIO_PORTA,
@@ -87,13 +92,35 @@ typedef enum
 	DIO_PORTD
 }DIO_ENU_PORT;
 
-/* Function Prototypes */
-u8 DIO_u8Init(void);
+/************************************************************************************/
+
+/************************************************************************************/
+/* ---------------------------> Function Prototypes    <----------------------------*/
+/************************************************************************************/
+
+void DIO_u8Init(void);
+
+/* ^ This function is used to initialize the DIO Driver with the values used inside */
+/*   the configuration file --> DIO_Config.h                                        */
+
 u8 DIO_u8SetPinDirection	(u8 u8PinNB, u8 u8Direction);
 u8 DIO_u8SetPinValue		(u8 u8PinNB, u8 u8Value);
 u8 DIO_u8ReadPinValue		(u8 u8PinNB, u8 * u8Value);
+
+/* ^ These prototypes deal with individual pins operations                          */
+/*   like -> 1. Setting Pin direction which writes on DDR register                  */
+/*   	  -> 2. Setting Pin value which writes on PORT register                     */
+/*        -> 3. Getting Pin value which reads from PIN register                     */
+
 u8 DIO_u8SetPortDirection	(u8 u8PortNB, u8 u8Direction);
 u8 DIO_u8SetPortValue		(u8 u8PortNB, u8 u8Value);
 u8 DIO_u8ReadPortValue		(u8 u8PortNB, u8 * u8Value);
+
+/* ^ These prototypes deal with individual pins operations                          */
+/*   like -> 1. Setting Port direction which writes on DDR register                 */
+/*   	  -> 2. Setting Port value which writes on PORT register                    */
+/*        -> 3. Getting Port value which reads from PIN register                    */
+
+/************************************************************************************/
 
 #endif /* DIO_INTERFACE_H_ */
