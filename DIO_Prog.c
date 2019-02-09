@@ -506,7 +506,7 @@ u8 DIO_u8SetPinValue(u8 copy_u8PinNB, u8 copy_u8Value)
 				}
 				else if((copy_u8PinNB >= DIO_PIN24) && (copy_u8PinNB <= DIO_PIN31))
 				{
-					DIO_Register_PORTD = SET_BIT(DIO_Register_PORTD, copy_u8PinNB);
+					DIO_Register_PORTD = SET_BIT(DIO_Register_PORTD, copy_u8PinNB % 8);
 				}
 				break;
 
@@ -588,38 +588,38 @@ u8 DIO_u8SetPortDirection(u8 copy_u8PortNB, u8 copy_u8Direction)
 			case DIO_PORT_INPUT:
 				if(copy_u8PortNB == DIO_PORTA)
 				{
-					DIO_Register_PORTA = RESET_PORT(DIO_Register_DDRA);
+					DIO_Register_DDRA = RESET_PORT(DIO_Register_DDRA);
 				}
 				else if(copy_u8PortNB == DIO_PORTB)
 				{
-					DIO_Register_PORTB = RESET_PORT(DIO_Register_DDRB);
+					DIO_Register_DDRB = RESET_PORT(DIO_Register_DDRB);
 				}
 				else if(copy_u8PortNB == DIO_PORTC)
 				{
-					DIO_Register_PORTC = RESET_PORT(DIO_Register_DDRC);
+					DIO_Register_DDRC = RESET_PORT(DIO_Register_DDRC);
 				}
 				else if(copy_u8PortNB == DIO_PORTD)
 				{
-					DIO_Register_PORTD = RESET_PORT(DIO_Register_DDRD);
+					DIO_Register_DDRD = RESET_PORT(DIO_Register_DDRD);
 				}
 				break;
 
 			case DIO_PORT_OUTPUT:
 				if(copy_u8PortNB == DIO_PORTA)
 				{
-					DIO_Register_PORTA = SET_PORT(DIO_Register_PORTA);
+					DIO_Register_DDRA = SET_PORT(DIO_Register_DDRA);
 				}
 				else if(copy_u8PortNB == DIO_PORTB)
 				{
-					DIO_Register_PORTB = SET_PORT(DIO_Register_PORTB);
+					DIO_Register_DDRB = SET_PORT(DIO_Register_DDRB);
 				}
 				else if(copy_u8PortNB == DIO_PORTC)
 				{
-					DIO_Register_PORTC = SET_PORT(DIO_Register_PORTC);
+					DIO_Register_DDRC = SET_PORT(DIO_Register_DDRC);
 				}
 				else if(copy_u8PortNB == DIO_PORTD)
 				{
-					DIO_Register_PORTD = SET_PORT(DIO_Register_PORTD);
+					DIO_Register_DDRD = SET_PORT(DIO_Register_DDRD);
 				}
 				break;
 

@@ -212,7 +212,7 @@
 
 /* ------------------------>>> Bit Access     <<<-----------------------------------*/
 #define DIO_Register_PORTD_BIT0        (((Register *)0x32) -> BitAccess.Bit0)
-#define DIO_Register_PORTD_BITSyntax1        (((Register *)0x32) -> BitAccess.Bit1)
+#define DIO_Register_PORTD_BIT1        (((Register *)0x32) -> BitAccess.Bit1)
 #define DIO_Register_PORTD_BIT2        (((Register *)0x32) -> BitAccess.Bit2)
 #define DIO_Register_PORTD_BIT3        (((Register *)0x32) -> BitAccess.Bit3)
 #define DIO_Register_PORTD_BIT4        (((Register *)0x32) -> BitAccess.Bit4)
