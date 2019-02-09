@@ -5,14 +5,17 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../DIO_Prog.c \
+../Lib_Delay.c \
 ../main.c 
 
 OBJS += \
 ./DIO_Prog.o \
+./Lib_Delay.o \
 ./main.o 
 
 C_DEPS += \
 ./DIO_Prog.d \
+./Lib_Delay.d \
 ./main.d 
 
 

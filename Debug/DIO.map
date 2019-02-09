@@ -4,6 +4,8 @@ Archive member included to satisfy reference by file (symbol)
                               /usr/lib/gcc/avr/8.2.0/../../../../avr/lib/avr5/crtatmega32.o (exit)
 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
                               ./DIO_Prog.o (__do_copy_data)
+/usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_umulhisi3.o)
+                              ./Lib_Delay.o (__umulhisi3)
 
 Memory Configuration
 
@@ -21,6 +23,7 @@ Linker script and memory map
 
 LOAD /usr/lib/gcc/avr/8.2.0/../../../../avr/lib/avr5/crtatmega32.o
 LOAD ./DIO_Prog.o
+LOAD ./Lib_Delay.o
 LOAD ./main.o
 START GROUP
 LOAD /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a
@@ -126,7 +129,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x7c6
+.text           0x0000000000000000      0x8e0
  *(.vectors)
  .vectors       0x0000000000000000       0x54 /usr/lib/gcc/avr/8.2.0/../../../../avr/lib/avr5/crtatmega32.o
                 0x0000000000000000                __vectors
@@ -203,9 +206,11 @@ END GROUP
                 0x000000000000007e                __vector_18
                 0x000000000000007e                __vector_20
  .text          0x0000000000000082        0x0 ./DIO_Prog.o
+ .text          0x0000000000000082        0x0 ./Lib_Delay.o
  .text          0x0000000000000082        0x0 ./main.o
  .text          0x0000000000000082        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
  .text          0x0000000000000082        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
+ .text          0x0000000000000082        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_umulhisi3.o)
                 0x0000000000000082                . = ALIGN (0x2)
  *(.text.*)
  .text.DIO_vInit
@@ -229,39 +234,59 @@ END GROUP
  .text.DIO_u8ReadPortValue
                 0x0000000000000718       0x9a ./DIO_Prog.o
                 0x0000000000000718                DIO_u8ReadPortValue
- .text.main     0x00000000000007b2       0x10 ./main.o
-                0x00000000000007b2                main
+ .text.Lib_vDelayMs
+                0x00000000000007b2       0xa2 ./Lib_Delay.o
+                0x00000000000007b2                Lib_vDelayMs
+ .text.Lib_vDelayUs
+                0x0000000000000854       0x56 ./Lib_Delay.o
+                0x0000000000000854                Lib_vDelayUs
+ .text.main     0x00000000000008aa       0x14 ./main.o
+                0x00000000000008aa                main
  .text.libgcc.mul
-                0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
+                0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.div
-                0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
- .text.libgcc   0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
+                0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc   0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
+                0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
+                0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
+                0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.fixed
-                0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
+                0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.mul
-                0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
+                0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.div
-                0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
- .text.libgcc   0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
+                0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc   0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.prologue
-                0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
+                0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.builtins
-                0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
+                0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.fmul
-                0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
+                0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.fixed
-                0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
-                0x00000000000007c2                . = ALIGN (0x2)
+                0x00000000000008be        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.mul
+                0x00000000000008be       0x1e /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_umulhisi3.o)
+                0x00000000000008be                __umulhisi3
+ .text.libgcc.div
+                0x00000000000008dc        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_umulhisi3.o)
+ .text.libgcc   0x00000000000008dc        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_umulhisi3.o)
+ .text.libgcc.prologue
+                0x00000000000008dc        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_umulhisi3.o)
+ .text.libgcc.builtins
+                0x00000000000008dc        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_umulhisi3.o)
+ .text.libgcc.fmul
+                0x00000000000008dc        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_umulhisi3.o)
+ .text.libgcc.fixed
+                0x00000000000008dc        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_umulhisi3.o)
+                0x00000000000008dc                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000000000007c2        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
-                0x00000000000007c2                exit
-                0x00000000000007c2                _exit
+ .fini9         0x00000000000008dc        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
+                0x00000000000008dc                exit
+                0x00000000000008dc                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -280,24 +305,26 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000000000007c2        0x4 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
+ .fini0         0x00000000000008dc        0x4 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
  *(.fini0)
  *(.hightext)
  *(.hightext*)
  *(.progmemx.*)
-                0x00000000000007c6                . = ALIGN (0x2)
+                0x00000000000008e0                . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
-                0x00000000000007c6                _etext = .
+                0x00000000000008e0                _etext = .
 
-.data           0x0000000000800060        0x8 load address 0x00000000000007c6
+.data           0x0000000000800060        0x8 load address 0x00000000000008e0
                 0x0000000000800060                PROVIDE (__data_start = .)
  *(.data)
  .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/8.2.0/../../../../avr/lib/avr5/crtatmega32.o
  .data          0x0000000000800060        0x0 ./DIO_Prog.o
+ .data          0x0000000000800060        0x0 ./Lib_Delay.o
  .data          0x0000000000800060        0x0 ./main.o
  .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
  .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
+ .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_umulhisi3.o)
  *(.data*)
  *(.gnu.linkonce.d*)
  *(.rodata)
@@ -314,14 +341,16 @@ END GROUP
  *(.bss)
  .bss           0x0000000000800068        0x0 /usr/lib/gcc/avr/8.2.0/../../../../avr/lib/avr5/crtatmega32.o
  .bss           0x0000000000800068        0x0 ./DIO_Prog.o
+ .bss           0x0000000000800068        0x0 ./Lib_Delay.o
  .bss           0x0000000000800068        0x0 ./main.o
  .bss           0x0000000000800068        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_exit.o)
  .bss           0x0000000000800068        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_copy_data.o)
+ .bss           0x0000000000800068        0x0 /usr/lib/gcc/avr/8.2.0/avr5/libgcc.a(_umulhisi3.o)
  *(.bss*)
  *(COMMON)
                 [!provide]                        PROVIDE (__bss_end = .)
-                0x00000000000007c6                __data_load_start = LOADADDR (.data)
-                0x00000000000007ce                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000000000008e0                __data_load_start = LOADADDR (.data)
+                0x00000000000008e8                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0000000000800068        0x0
                 [!provide]                        PROVIDE (__noinit_start = .)
@@ -346,15 +375,17 @@ END GROUP
 .signature
  *(.signature*)
 
-.stab           0x0000000000000000     0x13a4
+.stab           0x0000000000000000     0x17e8
  *(.stab)
  .stab          0x0000000000000000     0x1104 ./DIO_Prog.o
- .stab          0x0000000000001104      0x2a0 ./main.o
-                                        0x2ac (size before relaxing)
+ .stab          0x0000000000001104      0x420 ./Lib_Delay.o
+                                        0x4a4 (size before relaxing)
+ .stab          0x0000000000001524      0x2c4 ./main.o
+                                        0x384 (size before relaxing)
 
-.stabstr        0x0000000000000000      0xcd2
+.stabstr        0x0000000000000000      0xd6d
  *(.stabstr)
- .stabstr       0x0000000000000000      0xcd2 ./DIO_Prog.o
+ .stabstr       0x0000000000000000      0xd6d ./DIO_Prog.o
 
 .stab.excl
  *(.stab.excl)
@@ -372,6 +403,7 @@ END GROUP
  *(.comment)
  .comment       0x0000000000000000       0x11 ./DIO_Prog.o
                                          0x12 (size before relaxing)
+ .comment       0x0000000000000011       0x12 ./Lib_Delay.o
  .comment       0x0000000000000011       0x12 ./main.o
 
 .note.gnu.avr.deviceinfo

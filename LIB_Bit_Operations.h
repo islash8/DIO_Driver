@@ -168,7 +168,6 @@ shiftedNumber[bit_number]
 
 #define  SET_H_NIBBLE(variable) \
 		 ((variable) | (HIGH_NIBBLE));
-
 /**************************************************************/
 /*  2. Set low nibble operation:								*/
 /*  operation -> Variable is taken and get OR-ed with 0x0F		*/

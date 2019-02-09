@@ -3,25 +3,25 @@ DIO.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000007c6  00000000  00000000  00000074  2**1
+  0 .text         000008e0  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000008  00800060  000007c6  0000083a  2**0
+  1 .data         00000008  00800060  000008e0  00000954  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .stab         000013a4  00000000  00000000  00000844  2**2
+  2 .stab         000017e8  00000000  00000000  0000095c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  3 .stabstr      00000cd2  00000000  00000000  00001be8  2**0
+  3 .stabstr      00000d6d  00000000  00000000  00002144  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .comment      00000011  00000000  00000000  000028ba  2**0
+  4 .comment      00000011  00000000  00000000  00002eb1  2**0
                   CONTENTS, READONLY
-  5 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000028cc  2**2
+  5 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00002ec4  2**2
                   CONTENTS, READONLY
-  6 .debug_info   000004e6  00000000  00000000  00002908  2**0
+  6 .debug_info   000004e6  00000000  00000000  00002f00  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000004a3  00000000  00000000  00002dee  2**0
+  7 .debug_abbrev 000004a3  00000000  00000000  000033e6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   0000001d  00000000  00000000  00003291  2**0
+  8 .debug_line   0000001d  00000000  00000000  00003889  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000196  00000000  00000000  000032ae  2**0
+  9 .debug_str    00000196  00000000  00000000  000038a6  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -61,16 +61,16 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e6 ec       	ldi	r30, 0xC6	; 198
-  68:	f7 e0       	ldi	r31, 0x07	; 7
+  66:	e0 ee       	ldi	r30, 0xE0	; 224
+  68:	f8 e0       	ldi	r31, 0x08	; 8
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
   70:	a8 36       	cpi	r26, 0x68	; 104
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
-  76:	0e 94 d9 03 	call	0x7b2	; 0x7b2 <main>
-  7a:	0c 94 e1 03 	jmp	0x7c2	; 0x7c2 <_exit>
+  76:	0e 94 55 04 	call	0x8aa	; 0x8aa <main>
+  7a:	0c 94 6e 04 	jmp	0x8dc	; 0x8dc <_exit>
 
 0000007e <__bad_interrupt>:
   7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -193,7 +193,7 @@ void DIO_vInit (void)
 	DIO_Register_PORTD = CONC_8BIT(DIO_u8_PIN24_INIT_PORT_VAL,  DIO_u8_PIN25_INIT_PORT_VAL,
   dc:	82 e3       	ldi	r24, 0x32	; 50
   de:	90 e0       	ldi	r25, 0x00	; 0
-  e0:	2f ef       	ldi	r18, 0xFF	; 255
+  e0:	2f e7       	ldi	r18, 0x7F	; 127
   e2:	fc 01       	movw	r30, r24
   e4:	20 83       	st	Z, r18
 
@@ -1429,26 +1429,212 @@ u8 DIO_u8ReadPortValue(u8 copy_u8PortNB, u8 * copy_pu8Value)
  7ae:	cf 91       	pop	r28
  7b0:	08 95       	ret
 
-000007b2 <main>:
- *  Created on: Feb 8, 2019
- *      Author: islash8
- */
+000007b2 <Lib_vDelayMs>:
+/*  input 		-> Time value of delay -> copy_u16time              */
+/*  output		-> N/A											    */
+/********************************************************************/
 
-void main (void)
+void Lib_vDelayMs(u16 copy_u16time)
 {
  7b2:	cf 93       	push	r28
  7b4:	df 93       	push	r29
  7b6:	cd b7       	in	r28, 0x3d	; 61
  7b8:	de b7       	in	r29, 0x3e	; 62
+ 7ba:	2a 97       	sbiw	r28, 0x0a	; 10
+ 7bc:	0f b6       	in	r0, 0x3f	; 63
+ 7be:	f8 94       	cli
+ 7c0:	de bf       	out	0x3e, r29	; 62
+ 7c2:	0f be       	out	0x3f, r0	; 63
+ 7c4:	cd bf       	out	0x3d, r28	; 61
+ 7c6:	9a 87       	std	Y+10, r25	; 0x0a
+ 7c8:	89 87       	std	Y+9, r24	; 0x09
+	u32 Local_CountNumber;
+	/*--------------------------------------------------------------*/
+
+	/*----------------------main implementation---------------------*/
+
+	for (Local_CountNumber=NULL; Local_CountNumber < copy_u16time ; Local_CountNumber++)
+ 7ca:	1d 82       	std	Y+5, r1	; 0x05
+ 7cc:	1e 82       	std	Y+6, r1	; 0x06
+ 7ce:	1f 82       	std	Y+7, r1	; 0x07
+ 7d0:	18 86       	std	Y+8, r1	; 0x08
+ 7d2:	28 c0       	rjmp	.+80     	; 0x824 <Lib_vDelayMs+0x72>
+		/*----------------------------------------------------------*/
+		/* outer loop which runs multiple of 1ms					*/
+		/* -> lower limit: 0										*/
+		/* -> upper limit: copy_u16time 						    */
+		/*----------------------------------------------------------*/
+		for(Local_InsideLoopCounter = NULL; Local_InsideLoopCounter < LIB_U8_UPPER_THRESHOLD ; Local_InsideLoopCounter++)
+ 7d4:	19 82       	std	Y+1, r1	; 0x01
+ 7d6:	1a 82       	std	Y+2, r1	; 0x02
+ 7d8:	1b 82       	std	Y+3, r1	; 0x03
+ 7da:	1c 82       	std	Y+4, r1	; 0x04
+ 7dc:	0f c0       	rjmp	.+30     	; 0x7fc <Lib_vDelayMs+0x4a>
+	...
+ 7e6:	89 81       	ldd	r24, Y+1	; 0x01
+ 7e8:	9a 81       	ldd	r25, Y+2	; 0x02
+ 7ea:	ab 81       	ldd	r26, Y+3	; 0x03
+ 7ec:	bc 81       	ldd	r27, Y+4	; 0x04
+ 7ee:	01 96       	adiw	r24, 0x01	; 1
+ 7f0:	a1 1d       	adc	r26, r1
+ 7f2:	b1 1d       	adc	r27, r1
+ 7f4:	89 83       	std	Y+1, r24	; 0x01
+ 7f6:	9a 83       	std	Y+2, r25	; 0x02
+ 7f8:	ab 83       	std	Y+3, r26	; 0x03
+ 7fa:	bc 83       	std	Y+4, r27	; 0x04
+ 7fc:	89 81       	ldd	r24, Y+1	; 0x01
+ 7fe:	9a 81       	ldd	r25, Y+2	; 0x02
+ 800:	ab 81       	ldd	r26, Y+3	; 0x03
+ 802:	bc 81       	ldd	r27, Y+4	; 0x04
+ 804:	80 3d       	cpi	r24, 0xD0	; 208
+ 806:	91 05       	cpc	r25, r1
+ 808:	a1 05       	cpc	r26, r1
+ 80a:	b1 05       	cpc	r27, r1
+ 80c:	40 f3       	brcs	.-48     	; 0x7de <Lib_vDelayMs+0x2c>
+	for (Local_CountNumber=NULL; Local_CountNumber < copy_u16time ; Local_CountNumber++)
+ 80e:	8d 81       	ldd	r24, Y+5	; 0x05
+ 810:	9e 81       	ldd	r25, Y+6	; 0x06
+ 812:	af 81       	ldd	r26, Y+7	; 0x07
+ 814:	b8 85       	ldd	r27, Y+8	; 0x08
+ 816:	01 96       	adiw	r24, 0x01	; 1
+ 818:	a1 1d       	adc	r26, r1
+ 81a:	b1 1d       	adc	r27, r1
+ 81c:	8d 83       	std	Y+5, r24	; 0x05
+ 81e:	9e 83       	std	Y+6, r25	; 0x06
+ 820:	af 83       	std	Y+7, r26	; 0x07
+ 822:	b8 87       	std	Y+8, r27	; 0x08
+ 824:	89 85       	ldd	r24, Y+9	; 0x09
+ 826:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 828:	cc 01       	movw	r24, r24
+ 82a:	a0 e0       	ldi	r26, 0x00	; 0
+ 82c:	b0 e0       	ldi	r27, 0x00	; 0
+ 82e:	2d 81       	ldd	r18, Y+5	; 0x05
+ 830:	3e 81       	ldd	r19, Y+6	; 0x06
+ 832:	4f 81       	ldd	r20, Y+7	; 0x07
+ 834:	58 85       	ldd	r21, Y+8	; 0x08
+ 836:	28 17       	cp	r18, r24
+ 838:	39 07       	cpc	r19, r25
+ 83a:	4a 07       	cpc	r20, r26
+ 83c:	5b 07       	cpc	r21, r27
+ 83e:	50 f2       	brcs	.-108    	; 0x7d4 <Lib_vDelayMs+0x22>
+			asm("nop");
+			asm("nop");
+		}
+	}
 
 }
- 7ba:	00 00       	nop
- 7bc:	df 91       	pop	r29
- 7be:	cf 91       	pop	r28
- 7c0:	08 95       	ret
+ 840:	00 00       	nop
+ 842:	2a 96       	adiw	r28, 0x0a	; 10
+ 844:	0f b6       	in	r0, 0x3f	; 63
+ 846:	f8 94       	cli
+ 848:	de bf       	out	0x3e, r29	; 62
+ 84a:	0f be       	out	0x3f, r0	; 63
+ 84c:	cd bf       	out	0x3d, r28	; 61
+ 84e:	df 91       	pop	r29
+ 850:	cf 91       	pop	r28
+ 852:	08 95       	ret
 
-000007c2 <_exit>:
- 7c2:	f8 94       	cli
+00000854 <Lib_vDelayUs>:
+/*				 the given input value of time in microseconds  */
+/*  input 		-> Time value of delay                          */
+/*  output		-> N/A											*/
+/****************************************************************/
+void Lib_vDelayUs(u16 copy_u16time)
+{
+ 854:	cf 93       	push	r28
+ 856:	df 93       	push	r29
+ 858:	00 d0       	rcall	.+0      	; 0x85a <Lib_vDelayUs+0x6>
+ 85a:	00 d0       	rcall	.+0      	; 0x85c <Lib_vDelayUs+0x8>
+ 85c:	cd b7       	in	r28, 0x3d	; 61
+ 85e:	de b7       	in	r29, 0x3e	; 62
+ 860:	9c 83       	std	Y+4, r25	; 0x04
+ 862:	8b 83       	std	Y+3, r24	; 0x03
+	/* this formula is used to calculate T1, T2, T3, then       */
+	/* then calculate the number of iterations needed to 		*/
+	/* generate the required delay in microseconds              */
+	/*----------------------------------------------------------*/
 
-000007c4 <__stop_program>:
- 7c4:	ff cf       	rjmp	.-2      	; 0x7c4 <__stop_program>
+	u16 local_CountNumber = (copy_u16time - LIB_U8_TOTAL_CALCULATED) / LIB_U8_AVG_TIME_PER_ITERATION;
+ 864:	8b 81       	ldd	r24, Y+3	; 0x03
+ 866:	9c 81       	ldd	r25, Y+4	; 0x04
+ 868:	45 97       	sbiw	r24, 0x15	; 21
+ 86a:	9c 01       	movw	r18, r24
+ 86c:	a9 e8       	ldi	r26, 0x89	; 137
+ 86e:	b8 e8       	ldi	r27, 0x88	; 136
+ 870:	0e 94 5f 04 	call	0x8be	; 0x8be <__umulhisi3>
+ 874:	96 95       	lsr	r25
+ 876:	87 95       	ror	r24
+ 878:	96 95       	lsr	r25
+ 87a:	87 95       	ror	r24
+ 87c:	96 95       	lsr	r25
+ 87e:	87 95       	ror	r24
+ 880:	9a 83       	std	Y+2, r25	; 0x02
+ 882:	89 83       	std	Y+1, r24	; 0x01
+
+	for(;local_CountNumber > NULL; local_CountNumber--)
+ 884:	06 c0       	rjmp	.+12     	; 0x892 <__stack+0x33>
+	{
+			asm("nop");
+ 886:	00 00       	nop
+	for(;local_CountNumber > NULL; local_CountNumber--)
+ 888:	89 81       	ldd	r24, Y+1	; 0x01
+ 88a:	9a 81       	ldd	r25, Y+2	; 0x02
+ 88c:	01 97       	sbiw	r24, 0x01	; 1
+ 88e:	9a 83       	std	Y+2, r25	; 0x02
+ 890:	89 83       	std	Y+1, r24	; 0x01
+ 892:	89 81       	ldd	r24, Y+1	; 0x01
+ 894:	9a 81       	ldd	r25, Y+2	; 0x02
+ 896:	89 2b       	or	r24, r25
+ 898:	b1 f7       	brne	.-20     	; 0x886 <__stack+0x27>
+	}
+}
+ 89a:	00 00       	nop
+ 89c:	0f 90       	pop	r0
+ 89e:	0f 90       	pop	r0
+ 8a0:	0f 90       	pop	r0
+ 8a2:	0f 90       	pop	r0
+ 8a4:	df 91       	pop	r29
+ 8a6:	cf 91       	pop	r28
+ 8a8:	08 95       	ret
+
+000008aa <main>:
+#include "STD_Types.h"
+#include "Lib_Delay.h"
+#include "DIO_Interface.h"
+
+void main (void)
+{
+ 8aa:	cf 93       	push	r28
+ 8ac:	df 93       	push	r29
+ 8ae:	cd b7       	in	r28, 0x3d	; 61
+ 8b0:	de b7       	in	r29, 0x3e	; 62
+	DIO_vInit();
+ 8b2:	0e 94 41 00 	call	0x82	; 0x82 <DIO_vInit>
+}
+ 8b6:	00 00       	nop
+ 8b8:	df 91       	pop	r29
+ 8ba:	cf 91       	pop	r28
+ 8bc:	08 95       	ret
+
+000008be <__umulhisi3>:
+ 8be:	a2 9f       	mul	r26, r18
+ 8c0:	b0 01       	movw	r22, r0
+ 8c2:	b3 9f       	mul	r27, r19
+ 8c4:	c0 01       	movw	r24, r0
+ 8c6:	a3 9f       	mul	r26, r19
+ 8c8:	70 0d       	add	r23, r0
+ 8ca:	81 1d       	adc	r24, r1
+ 8cc:	11 24       	eor	r1, r1
+ 8ce:	91 1d       	adc	r25, r1
+ 8d0:	b2 9f       	mul	r27, r18
+ 8d2:	70 0d       	add	r23, r0
+ 8d4:	81 1d       	adc	r24, r1
+ 8d6:	11 24       	eor	r1, r1
+ 8d8:	91 1d       	adc	r25, r1
+ 8da:	08 95       	ret
+
+000008dc <_exit>:
+ 8dc:	f8 94       	cli
+
+000008de <__stop_program>:
+ 8de:	ff cf       	rjmp	.-2      	; 0x8de <__stop_program>
