@@ -76,7 +76,7 @@ shiftedNumber[bit_number]
 /**************************************************************/
 
 #define  SET_BIT(variable, bit_number) \
-		 ((variable) | (LOOK_UP_TABLE(bit_number)))
+		 ((variable) | (LOOK_UP_TABLE(bit_number%NUMBER_OF_BITS)))
 
 /**************************************************************/
 /*  2. Reset bit operation:										*/
@@ -93,7 +93,7 @@ shiftedNumber[bit_number]
 /**************************************************************/
 
 #define  RESET_BIT(variable, bit_number) \
-		 ((variable)& ~(LOOK_UP_TABLE(bit_number)))
+		 ((variable)& ~(LOOK_UP_TABLE(bit_number%NUMBER_OF_BITS)))
 
 /**************************************************************/
 /*  3. Toggle bit operation:									*/
@@ -282,10 +282,10 @@ shiftedNumber[bit_number]
 /*  Example	  -> x = CONC_8BIT(1,1,1,1,0,0,0,0);				*/
 /*            -> x = 0b11110000;                                */
 /**************************************************************/
-#define CONC_8BIT(b7, b6, b5, b4, b3, b2, b1, b0) \
-		(CONC_HELPER(b7, b6, b5, b4, b3, b2, b1, b0))
+#define CONC_8BIT(b0, b1, b2, b3, b4, b5, b6, b7) \
+		(CONC_HELPER(b0, b1, b2, b3, b4, b5, b6, b7))
 
-#define CONC_HELPER(b7, b6, b5, b4, b3, b2, b1, b0) \
+#define CONC_HELPER(b0, b1, b2, b3, b4, b5, b6, b7) \
 		(0b##b7##b6##b5##b4##b3##b2##b1##b0)
 
 /**************************************************************/
@@ -296,8 +296,7 @@ shiftedNumber[bit_number]
 /*  Example	  -> x = SET_PORT(x);				                */
 /*            -> x = 0b1111 1111;                               */
 /**************************************************************/
-#define SET_PORT(x) \
-	(x || 0xFF)
+#define SET_PORT(x) (HIGH_VALUE)
 
 /**************************************************************/
 /*  4. Reset Port Value:							            */
@@ -307,8 +306,7 @@ shiftedNumber[bit_number]
 /*  Example	  -> x = RESET_PORT(x);				                */
 /*            -> x = 0b0000 0000;                               */
 /**************************************************************/
-#define RESET_PORT(x) \
-	(x && 0x00)
+#define RESET_PORT(x) (LOW_VALUE)
 /*===============================================================*/
 
 #endif /*LIB_BIT_OPERATIONS_H_ */
