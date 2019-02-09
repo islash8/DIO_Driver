@@ -18,6 +18,7 @@ void main (void)
 	DIO_u8SetPortDirection(DIO_PORTD, DIO_PORT_OUTPUT);
 		while (1)
 		{
+/*
 			DIO_u8SetPinValue(DIO_PIN24, DIO_PIN_HIGH);
 			Lib_vDelayMs(500);
 			DIO_u8SetPinValue(DIO_PIN24, DIO_PIN_LOW);
@@ -49,6 +50,11 @@ void main (void)
 			DIO_u8SetPinValue(DIO_PIN31, DIO_PIN_HIGH);
 			Lib_vDelayMs(500);
 			DIO_u8SetPinValue(DIO_PIN31, DIO_PIN_LOW);
+			Lib_vDelayMs(500);
+*/
+			DIO_u8SetPortValue(DIO_PORTD, 0x41);
+			Lib_vDelayMs(500);
+			DIO_u8SetPortValue(DIO_PORTD, DIO_PORT_LOW);
 			Lib_vDelayMs(500);
 
 

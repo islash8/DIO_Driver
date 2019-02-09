@@ -33,6 +33,8 @@
 #define DIO_PIN_INIT_VAL_HIGH		1
 #define DIO_PIN_INIT_VAL_LOW		0
 
+#define DIO_BYTE_VALUE_RANGE		0x01 ... 0xFE
+
 /************************************************************************************/
 
 

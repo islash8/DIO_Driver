@@ -689,6 +689,24 @@ u8 DIO_u8SetPortValue(u8 copy_u8PortNB, u8 copy_pu8Value)
 				}
 				break;
 
+			case DIO_BYTE_VALUE_RANGE:
+				if(copy_u8PortNB == DIO_PORTA)
+				{
+					DIO_Register_PORTA = ASSIGN_PORT(DIO_Register_PORTA, copy_pu8Value);
+				}
+				else if(copy_u8PortNB == DIO_PORTB)
+				{
+					DIO_Register_PORTB = ASSIGN_PORT(DIO_Register_PORTB, copy_pu8Value);
+				}
+				else if(copy_u8PortNB == DIO_PORTC)
+				{
+					DIO_Register_PORTC = ASSIGN_PORT(DIO_Register_PORTC, copy_pu8Value);
+				}
+				else if(copy_u8PortNB == DIO_PORTD)
+				{
+					DIO_Register_PORTD = ASSIGN_PORT(DIO_Register_PORTD, copy_pu8Value);
+				}
+				break;
 			default:
 				local_u8Error = STD_ERROR_NOK;
 		}

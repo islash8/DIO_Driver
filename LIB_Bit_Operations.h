@@ -167,7 +167,7 @@ shiftedNumber[bit_number]
 /**************************************************************/
 
 #define  SET_H_NIBBLE(variable) \
-		 ((variable) | (HIGH_NIBBLE));
+		 ((variable) | (HIGH_NIBBLE))
 /**************************************************************/
 /*  2. Set low nibble operation:								*/
 /*  operation -> Variable is taken and get OR-ed with 0x0F		*/
@@ -181,7 +181,7 @@ shiftedNumber[bit_number]
 /**************************************************************/
 
 #define  SET_L_NIBBLE(variable) \
-		 ((variable) | (LOW_NIBBLE));
+		 ((variable) | (LOW_NIBBLE))
 
 /**************************************************************/
 /*  3. Reset high nibble operation:								*/
@@ -196,7 +196,7 @@ shiftedNumber[bit_number]
 /**************************************************************/
 
 #define  RESET_H_NIBBLE(variable) \
-		 ((variable) & (LOW_NIBBLE));
+		 ((variable) & (LOW_NIBBLE))
 
 /**************************************************************/
 /*  4. Reset low nibble operation:								*/
@@ -211,7 +211,7 @@ shiftedNumber[bit_number]
 /**************************************************************/
 
 #define  RESET_L_NIBBLE(variable) \
-		 ((variable) & (HIGH_NIBBLE));
+		 ((variable) & (HIGH_NIBBLE))
 
 /**************************************************************/
 /*  5. Toggle high nibble operation:							*/
@@ -226,7 +226,7 @@ shiftedNumber[bit_number]
 /**************************************************************/
 
 #define  TOGGLE_H_NIBBLE(variable) \
-		 ((variable) ^ (HIGH_NIBBLE));
+		 ((variable) ^ (HIGH_NIBBLE))
 
 /**************************************************************/
 /*  6. Toggle low nibble operation:								*/
@@ -241,7 +241,7 @@ shiftedNumber[bit_number]
 /**************************************************************/
 
 #define  TOGGLE_L_NIBBLE(variable) \
-		 ((variable) ^ (LOW_NIBBLE));
+		 ((variable) ^ (LOW_NIBBLE))
 
 /*====================PORT OPERATIONS===========================*/
 
@@ -257,7 +257,7 @@ shiftedNumber[bit_number]
 /**************************************************************/
 
 #define  ASSIGN_PORT(variable, value) \
-		 ((variable) = (value));
+		 (value)
 
 /**************************************************************/
 /*  2. Get whole byte operation:							    */
@@ -270,7 +270,7 @@ shiftedNumber[bit_number]
 /**************************************************************/
 
 #define  GET_PORT(variable, place) \
-		 ((place) = (variable));
+		 ((place) = (variable))
 
 /**************************************************************/
 /*  3. Concatenate whole port:							        */
